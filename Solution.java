@@ -1,15 +1,16 @@
-public class Solution {
-    public String reverseWords(String s) {
-        if (s == null || s.length() == 0) {
-			return "";
+class Solution {
+    public boolean isValid(String s) {
+		Stack<Character> stack = new Stack<Character>();
+		for (char c : s.toCharArray()) {
+			if (c == '(')
+				stack.push(')');
+			else if (c == '{')
+				stack.push('}');
+			else if (c == '[')
+				stack.push(']');
+			else if (stack.isEmpty() || stack.pop() != c)
+				return false;
 		}
-		String[] arr = s.split(" ");
-		StringBuilder sb = new StringBuilder();
-		for (int i = arr.length - 1; i >= 0; --i) {
-			if (!arr[i].isEmpty()) {
-				sb.append(arr[i]).append(" ");
-			}
-		}
-		return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
-    }
+		return stack.isEmpty();
+	}
 }
